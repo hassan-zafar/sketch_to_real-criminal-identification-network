@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
@@ -7,6 +9,8 @@ import 'package:sketch_to_real/screens/drawing/drawing_area.dart';
 import 'package:http/http.dart' as http;
 
 class DrawingPage extends StatefulWidget {
+  const DrawingPage({Key? key}) : super(key: key);
+
   // const DrawingPage({ Key key }) : super(key: key);
 
   @override
@@ -15,11 +19,12 @@ class DrawingPage extends StatefulWidget {
 
 class _DrawingPageState extends State<DrawingPage> {
   List<DrawingArea> points = [];
+  Widget? imageOutput;
 
   void saveImage(List<DrawingArea> points) async {
     final recorder = ui.PictureRecorder();
-    final canvas = Canvas(
-        recorder, Rect.fromPoints(Offset(0.0, 0.0), Offset(200.0, 200.0)));
+    final canvas = Canvas(recorder,
+        Rect.fromPoints(const Offset(0.0, 0.0), const Offset(200.0, 200.0)));
     Paint paint = Paint()
       ..color = Colors.white
       ..strokeWidth = 2.0
@@ -56,10 +61,26 @@ class _DrawingPageState extends State<DrawingPage> {
           await http.post(Uri.parse(url), body: body, headers: headers);
       final Map<String, dynamic> responseData = json.decode(response.body);
       String outputBytes = responseData['image'];
+      print(outputBytes.substring(2, outputBytes.length - 1));
+      displayResponseImage(outputBytes);
     } catch (e) {
       print("Error Has Occured");
       return null;
     }
+  }
+
+  void displayResponseImage(String bytes) async {
+    Uint8List convertedBytes = base64Decode(bytes);
+    setState(() {
+      imageOutput = Container(
+        width: 256,
+        height: 256,
+        child: Image.memory(
+          convertedBytes,
+          fit: BoxFit.cover,
+        ),
+      );
+    });
   }
 
   @override
@@ -81,9 +102,8 @@ class _DrawingPageState extends State<DrawingPage> {
               height: 256,
               child: GestureDetector(
                 onPanEnd: (details) {
-                  setState(() {
-                    // points.add();
-                  });
+                  saveImage(points);
+                  setState(() {});
                 },
                 onPanDown: (details) {
                   setState(() {
@@ -119,11 +139,19 @@ class _DrawingPageState extends State<DrawingPage> {
             ),
           ),
           IconButton(
-            onPressed: () => this.setState(() {
+            onPressed: () => setState(() {
               points.clear();
             }),
-            icon: Icon(Icons.clear),
-          )
+            icon: const Icon(Icons.clear),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: SizedBox(
+              width: 256,
+              height: 256,
+              child: imageOutput,
+            ),
+          ),
         ],
       ),
     );
