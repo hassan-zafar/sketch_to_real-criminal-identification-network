@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart';
 class DrawingArea {
   Offset ?points;
   Paint ?areaPaint;
@@ -10,7 +10,7 @@ class DrawingArea {
 class MyCustomPainter extends CustomPainter {
   List<DrawingArea> points;
   MyCustomPainter({@required List<DrawingArea> ?points})
-      : this.points = points!.toList();
+      : points = points!.toList();
 
   @override
   void paint(Canvas canvas, Size size) {
