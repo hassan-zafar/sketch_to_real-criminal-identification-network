@@ -49,7 +49,7 @@ class _DrawingPageState extends State<DrawingPage> {
 
   void fetchResponse(var base64Image) async {
     var data = {'image': base64Image};
-    var url = 'http://192.168.51.112:5000/predict';
+    var url = 'http://192.168.43.18:5000/predict';
     Map<String, String> headers = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
