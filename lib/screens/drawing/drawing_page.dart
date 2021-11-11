@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison
+//@dart=2.9
 
 import 'dart:convert';
 import 'dart:typed_data';
@@ -9,7 +9,7 @@ import 'package:sketch_to_real/screens/drawing/drawing_area.dart';
 import 'package:http/http.dart' as http;
 
 class DrawingPage extends StatefulWidget {
-  const DrawingPage({Key? key}) : super(key: key);
+  // const DrawingPage({Key? key}) : super(key: key);
 
   // const DrawingPage({ Key key }) : super(key: key);
 
@@ -19,7 +19,8 @@ class DrawingPage extends StatefulWidget {
 
 class _DrawingPageState extends State<DrawingPage> {
   List<DrawingArea> points = [];
-  Widget? imageOutput;
+  Widget imageOutput;
+  TextEditingController ipAddressController = TextEditingController();
 
   void saveImage(List<DrawingArea> points) async {
     final recorder = ui.PictureRecorder();
@@ -36,20 +37,21 @@ class _DrawingPageState extends State<DrawingPage> {
     canvas.drawRect(const Rect.fromLTWH(0, 0, 256, 256), paint2);
     for (int i = 0; i < points.length - 1; i++) {
       if (points[i] != null && points[i + 1] != null) {
-        canvas.drawLine(points[i].points!, points[i + 1].points!, paint);
+        canvas.drawLine(points[i].points, points[i + 1].points, paint);
       }
     }
     final picture = recorder.endRecording();
     final img = await picture.toImage(256, 256);
     final pngBytes = await img.toByteData(format: ui.ImageByteFormat.png);
-    final listBytes = Uint8List.view(pngBytes!.buffer);
+    final listBytes = Uint8List.view(pngBytes.buffer);
     String base64 = base64Encode(listBytes);
-    fetchResponse(base64);
+    fetchResponse(ipAddress: ipAddressController.text, base64Image: base64);
   }
 
-  void fetchResponse(var base64Image) async {
+  void fetchResponse(
+      {var base64Image, String ipAddress = "192.168.42.18"}) async {
     var data = {'image': base64Image};
-    var url = 'http://192.168.43.18:5000/predict';
+    var url = 'http://$ipAddress:5000/predict';
     Map<String, String> headers = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
@@ -62,7 +64,7 @@ class _DrawingPageState extends State<DrawingPage> {
       final Map<String, dynamic> responseData = json.decode(response.body);
       String outputBytes = responseData['image'];
       print(outputBytes.substring(2, outputBytes.length - 1));
-      displayResponseImage(outputBytes);
+      displayResponseImage(outputBytes.substring(2, outputBytes.length - 1));
     } catch (e) {
       print("Error Has Occured");
       return null;
@@ -72,7 +74,7 @@ class _DrawingPageState extends State<DrawingPage> {
   void displayResponseImage(String bytes) async {
     Uint8List convertedBytes = base64Decode(bytes);
     setState(() {
-      imageOutput = Container(
+      imageOutput = SizedBox(
         width: 256,
         height: 256,
         child: Image.memory(
@@ -86,73 +88,83 @@ class _DrawingPageState extends State<DrawingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Text(
-              "Draw the person's face ",
-              style: titleTextStyle(),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                controller: ipAddressController,
+              ),
             ),
-          ),
-          Center(
-            child: SizedBox(
-              width: 256,
-              height: 256,
-              child: GestureDetector(
-                onPanEnd: (details) {
-                  saveImage(points);
-                  setState(() {});
-                },
-                onPanDown: (details) {
-                  setState(() {
-                    points.add(DrawingArea(
-                        points: details.localPosition,
-                        areaPaint: Paint()
-                          ..color = Colors.white
-                          ..strokeCap = StrokeCap.round
-                          ..isAntiAlias = true
-                          ..strokeWidth = 2.0));
-                  });
-                },
-                onPanUpdate: (details) {
-                  setState(() {
-                    points.add(DrawingArea(
-                        points: details.localPosition,
-                        areaPaint: Paint()
-                          ..color = Colors.white
-                          ..strokeCap = StrokeCap.round
-                          ..isAntiAlias = true
-                          ..strokeWidth = 2.0));
-                  });
-                },
-                child: SizedBox.expand(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: CustomPaint(
-                      painter: MyCustomPainter(points: points),
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Text(
+                "Draw the person's face ",
+                style: titleTextStyle(),
+              ),
+            ),
+            Center(
+              child: SizedBox(
+                width: 256,
+                height: 256,
+                child: GestureDetector(
+                  onPanEnd: (details) {
+                    saveImage(points);
+                    setState(() {
+                      points.add(null);
+                    });
+                  },
+                  onPanDown: (details) {
+                    setState(() {
+                      points.add(DrawingArea(
+                          points: details.localPosition,
+                          areaPaint: Paint()
+                            ..color = Colors.white
+                            ..strokeCap = StrokeCap.round
+                            ..isAntiAlias = true
+                            ..strokeWidth = 2.0));
+                    });
+                  },
+                  onPanUpdate: (details) {
+                    setState(() {
+                      points.add(DrawingArea(
+                          points: details.localPosition,
+                          areaPaint: Paint()
+                            ..color = Colors.white
+                            ..strokeCap = StrokeCap.round
+                            ..isAntiAlias = true
+                            ..strokeWidth = 2.0));
+                    });
+                  },
+                  child: SizedBox.expand(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: CustomPaint(
+                        painter: MyCustomPainter(points: points),
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-          IconButton(
-            onPressed: () => setState(() {
-              points.clear();
-            }),
-            icon: const Icon(Icons.clear),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: SizedBox(
-              width: 256,
-              height: 256,
-              child: imageOutput,
+            IconButton(
+              onPressed: () => setState(() {
+                points.clear();
+              }),
+              icon: const Icon(Icons.clear),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: SizedBox(
+                width: 256,
+                height: 256,
+                child: imageOutput,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
