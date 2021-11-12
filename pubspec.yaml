@@ -60,8 +60,10 @@ dev_dependencies:
   # geolocator:
   bot_toast:
   http:
+  mime:
   animated_splash_screen:
   flutter_local_notifications:
+  file_picker:
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

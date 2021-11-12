@@ -1,12 +1,16 @@
 //@dart=2.9
-
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:sketch_to_real/constants.dart';
 import 'package:sketch_to_real/screens/drawing/drawing_area.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
+import "package:file_picker/file_picker.dart";
+// import 'package:mime/mime.dart';
+// import 'package:http_parser/http_parser.dart';
 
 class DrawingPage extends StatefulWidget {
   // const DrawingPage({Key? key}) : super(key: key);
@@ -20,7 +24,51 @@ class DrawingPage extends StatefulWidget {
 class _DrawingPageState extends State<DrawingPage> {
   List<DrawingArea> points = [];
   Widget imageOutput;
+  Image img1;
   TextEditingController ipAddressController = TextEditingController();
+
+  void pickFile() async {
+    FilePickerResult filePickerResult = await FilePicker.platform.pickFiles();
+    File file = File(filePickerResult.files.single.path);
+    loadImage(file);
+    final zxc = await file.readAsBytes();
+    final asd = Uint8List.view(zxc.buffer);
+    // List<int> asd = await file.readAsBytesSync();
+    img1;
+    print("file:$file");
+
+    String base64Img = base64Encode(asd);
+    base64Img = base64Img.substring(1, base64Img.length);
+    print("base64Img:$base64Img");
+
+    // XFile picker = await ImagePicker().pickImage(source: ImageSource.gallery);
+    // picker.readAsBytes;
+    //TODO:Important COde
+    // final mimeTypeData =
+    //     lookupMimeType(file.path, headerBytes: [0xFF, 0xD8]).split('/');
+    // var url = 'http://$ipAddress:5000/predict';
+
+    // final imageUploadRequest = await http.MultipartRequest(
+    //   "POST",
+    //   Uri.parse(url),
+    // );
+    // final fileXd = await http.MultipartFile.fromPath('image', file.path,
+    //     contentType: MediaType(mimeTypeData[0], mimeTypeData[1]));
+    // imageUploadRequest.fields['ext'] = mimeTypeData[1];
+    // imageUploadRequest.files.add(fileXd);
+
+    fetchResponse(base64Image: base64Img, ipAddress: ipAddressController.text);
+  }
+
+  void loadImage(File image) {
+    setState(() {
+      img1 = Image.file(
+        image,
+        height: 256,
+        width: 256,
+      );
+    });
+  }
 
   void saveImage(List<DrawingArea> points) async {
     final recorder = ui.PictureRecorder();
@@ -45,6 +93,7 @@ class _DrawingPageState extends State<DrawingPage> {
     final pngBytes = await img.toByteData(format: ui.ImageByteFormat.png);
     final listBytes = Uint8List.view(pngBytes.buffer);
     String base64 = base64Encode(listBytes);
+    print(base64);
     fetchResponse(ipAddress: ipAddressController.text, base64Image: base64);
   }
 
@@ -66,6 +115,7 @@ class _DrawingPageState extends State<DrawingPage> {
       print(outputBytes.substring(2, outputBytes.length - 1));
       displayResponseImage(outputBytes.substring(2, outputBytes.length - 1));
     } catch (e) {
+      print(e);
       print("Error Has Occured");
       return null;
     }
@@ -149,11 +199,21 @@ class _DrawingPageState extends State<DrawingPage> {
                 ),
               ),
             ),
-            IconButton(
-              onPressed: () => setState(() {
-                points.clear();
-              }),
-              icon: const Icon(Icons.clear),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () => setState(() {
+                    points.clear();
+                  }),
+                  icon: const Icon(Icons.clear),
+                ),
+                IconButton(
+                  onPressed: () => pickFile(),
+                  icon: const Icon(
+                    Icons.camera,
+                  ),
+                ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.all(10.0),
