@@ -1,6 +1,5 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 class DrawingArea {
   Offset ?points;
   Paint ?areaPaint;

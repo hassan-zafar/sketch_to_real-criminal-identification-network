@@ -152,14 +152,14 @@ class Comment extends StatelessWidget {
           title: RichText(
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14.0,
                     color: Colors.black,
                   ),
                   children: [
                     TextSpan(
                       text: username,
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     TextSpan(
                       text: " $comment",
