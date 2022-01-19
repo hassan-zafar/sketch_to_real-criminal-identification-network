@@ -51,11 +51,11 @@ class _EditProfileState extends State<EditProfile> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Padding(
+        const Padding(
           padding: EdgeInsets.only(top: 10),
-          child: Text(
+          child:  Text(
             "Display Name",
-            style: TextStyle(color: Colors.grey),
+            style:  TextStyle(color: Colors.grey),
           ),
         ),
         TextField(
@@ -73,7 +73,7 @@ class _EditProfileState extends State<EditProfile> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Padding(
+        const Padding(
           padding: EdgeInsets.only(top: 10),
           child: Text(
             "Bio",
@@ -126,9 +126,9 @@ class _EditProfileState extends State<EditProfile> {
         setState(() {
           _isUpdating = false;
         });
-        SnackBar snackbar = SnackBar(content: Text("Profile Updated"));
+        SnackBar snackbar = const SnackBar(content: Text("Profile Updated"));
         _scaffoldKey.currentState!.showSnackBar(snackbar);
-        Timer(Duration(seconds: 2), () {
+        Timer(const Duration(seconds: 2), () {
           Navigator.pop(context);
         });
       });
@@ -143,23 +143,23 @@ class _EditProfileState extends State<EditProfile> {
       child: Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          title: Text("Edit Profile"),
+          title: const Text("Edit Profile"),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.done),
+              icon: const Icon(Icons.done),
               onPressed: _isUpdating ? null : () => updateProfileData(),
             ),
           ],
         ),
         body: _isUpdating
-            ? LinearProgressIndicator()
+            ? const LinearProgressIndicator()
             : ListView(
                 children: <Widget>[
                   Container(
                     child: Column(
                       children: <Widget>[
                         Padding(
-                          padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                          padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
                           child: Stack(
                             children: [
                               // user!.photoUrl != ""
@@ -180,10 +180,10 @@ class _EditProfileState extends State<EditProfile> {
                               //       ),
                               GestureDetector(
                                 onTap: handleImageFromGallery,
-                                child: CircleAvatar(
+                                child: const CircleAvatar(
                                     backgroundColor: Colors.green,
                                     radius: 20.0,
-                                    child: Center(
+                                    child: const Center(
                                         child: Icon(
                                       Icons.add,
                                       size: 20.0,
@@ -195,7 +195,7 @@ class _EditProfileState extends State<EditProfile> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           child: Column(
                             children: <Widget>[
                               buildDisplayField(),
@@ -204,20 +204,20 @@ class _EditProfileState extends State<EditProfile> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(25.0),
+                          padding: const EdgeInsets.all(25.0),
                           child: FlatButton.icon(
                             onPressed: () {
                               // logout()
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.cancel,
                               color: Colors.red,
                               size: 40,
                             ),
-                            label: Text(
+                            label: const Text(
                               "Log Out",
                               style:
-                                  TextStyle(color: Colors.red, fontSize: 20.0),
+                                  const TextStyle(color: Colors.red, fontSize: 20.0),
                             ),
                           ),
                         ),
