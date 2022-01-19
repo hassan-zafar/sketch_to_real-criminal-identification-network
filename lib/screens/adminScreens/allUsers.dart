@@ -3,9 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 import 'package:sketch_to_real/config/collection_names.dart';
+import 'package:sketch_to_real/models/user_model.dart';
+import 'package:sketch_to_real/services/authentication_service.dart';
 import 'package:sketch_to_real/tools/loading.dart';
 
 
+import '../../constants.dart';
 import 'commentsNChat.dart';
 
 class UserNSearch extends StatefulWidget {
@@ -221,9 +224,9 @@ class _UserNSearchState extends State<UserNSearch>
             child: GestureDetector(
               onTap: () {
                 AuthenticationService().signOut();
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => LandingScreen(),
-                ));
+                // Navigator.of(context).pushReplacement(MaterialPageRoute(
+                //   builder: (context) => LandingScreen(),
+                // ));
               },
               child: Container(
                   decoration: BoxDecoration(
@@ -251,10 +254,10 @@ class UserResult extends StatelessWidget {
           GestureDetector(
             onLongPress: () => makeAdmin(context),
             onTap: () {
-              if (user.id != currentUser!.id) {
+              if (user.userId != currentUser!.userId) {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => CommentsNChat(
-                      chatId: user.id,
+                      chatId: user.userId,
                       chatNotificationToken: user.androidNotificationToken),
                 ));
               }
@@ -270,11 +273,11 @@ class UserResult extends StatelessWidget {
                     child: Icon(Icons.person),
                   ),
                   title: Text(
-                    user.name.toString(),
+                    user.userName.toString(),
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
-                    user.name.toString(),
+                    user.userName.toString(),
                   ),
                   trailing: Text(user.isAdmin != null && user.isAdmin == true
                       ? "Admin"
@@ -294,7 +297,7 @@ class UserResult extends StatelessWidget {
         builder: (context) {
           return SimpleDialog(
             children: <Widget>[
-              user.isAdmin! && user.id != currentUser!.id
+              user.isAdmin! && user.userId != currentUser!.userId
                   ? SimpleDialogOption(
                       onPressed: () {
                         Navigator.pop(context);
