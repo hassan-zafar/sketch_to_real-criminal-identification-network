@@ -221,14 +221,14 @@ class _PostState extends State<Post> {
                   Navigator.pop(context);
                   deletePost();
                 },
-                child: Text(
+                child: const Text(
                   'Delete',
-                  style: TextStyle(color: Colors.red),
+                  style:  TextStyle(color: Colors.red),
                 ),
               ),
               SimpleDialogOption(
                 onPressed: () => Navigator.pop(context),
-                child: Text('Cancel'),
+                child: const Text('Cancel'),
               )
             ],
           );
@@ -482,7 +482,7 @@ Padding postsTile({
                   imageUrl: imageLink,
                   placeholder: (context, url) =>
                       const Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                   fit: BoxFit.cover,
                 ),
               ),

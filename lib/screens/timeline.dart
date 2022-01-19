@@ -95,7 +95,7 @@ class _TimelineState extends State<Timeline> {
             child: Column(
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(12.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -104,7 +104,7 @@ class _TimelineState extends State<Timeline> {
                         color: Theme.of(context).primaryColor,
                         size: 30.0,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 8.0,
                       ),
                       Text(
