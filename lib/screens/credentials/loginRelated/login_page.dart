@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
                     key: _textFormKey,
                     child: Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Padding(
@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
                                 height: 90,
                               )),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         GlassContainer(
@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                               },
                               // onSaved: (val) => phoneNo = val,
                               autofocus: true,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 border: InputBorder.none,
                                 labelText: "E-mail",
                                 labelStyle: TextStyle(fontSize: 15.0),
@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         GlassContainer(
@@ -130,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Padding(
@@ -141,11 +141,11 @@ class _LoginPageState extends State<LoginPage> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        ForgetPasswordPage())),
+                                        const ForgetPasswordPage())),
                             child: GlassContainer(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Hero(
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: const Hero(
                                   tag: "passFor",
                                   child: Text(
                                     "Forgot Password?",
@@ -172,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
 
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
 // Move to Sign Up Page
