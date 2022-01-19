@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sketch_to_real/config/collection_names.dart';
-import 'package:sketch_to_real/screens/activity_feed.dart';
-import 'package:sketch_to_real/screens/drawing/drawing_page.dart';
 import 'package:sketch_to_real/screens/profile.dart';
-import 'package:sketch_to_real/screens/search.dart';
 import 'package:sketch_to_real/screens/timeline.dart';
 import 'package:sketch_to_real/screens/upload.dart';
 import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 import '../constants.dart';
+import 'drawing/drawing_page.dart';
 
 bool isAdmin = false;
 String ?userUid;
