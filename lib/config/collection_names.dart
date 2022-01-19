@@ -13,3 +13,5 @@ final DateTime timestamp = DateTime.now();
 final Reference storageRef = FirebaseStorage.instance.ref();
 bool isAdmin = false;
 AppUserModel? currentUser;
+final chatRoomRef = FirebaseFirestore.instance.collection('chatRoom');
+final chatListRef = FirebaseFirestore.instance.collection('chatLists');
