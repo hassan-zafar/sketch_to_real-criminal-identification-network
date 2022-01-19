@@ -19,7 +19,8 @@ class CommentsNChat extends StatefulWidget {
   // final bool? isParent;
   final String? chatNotificationToken;
 //  final String userName;
-  CommentsNChat({
+  const CommentsNChat({
+    Key? key,
     // this.postId,
     // this.postMediaUrl,
     // this.postOwnerId,
@@ -29,7 +30,7 @@ class CommentsNChat extends StatefulWidget {
     // @required this.isPostComment,
     required this.chatNotificationToken,
     // @required this.isProductComment
-  });
+  }) : super(key: key);
   @override
   CommentsNChatState createState() => CommentsNChatState();
 }
@@ -221,7 +222,7 @@ class CommentsNMessages extends StatefulWidget {
   final Timestamp? timestamp;
   final String? commentId;
   final String? androidNotificationToken;
-  CommentsNMessages({
+  const CommentsNMessages({
     this.userName,
     this.userId,
     this.avatarUrl,
@@ -265,13 +266,13 @@ class _CommentsNMessagesState extends State<CommentsNMessages> {
           color: isMe ? Colors.orange : Colors.brown,
           borderRadius: isMe
               ? const BorderRadius.only(
-                  bottomLeft: const Radius.circular(20),
+                  bottomLeft: Radius.circular(20),
                   bottomRight: Radius.circular(20),
                   topLeft: Radius.circular(20),
                 )
               : const BorderRadius.only(
-                  bottomLeft: const Radius.circular(20),
-                  bottomRight: const Radius.circular(20),
+                  bottomLeft:  Radius.circular(20),
+                  bottomRight:  Radius.circular(20),
                   topRight: Radius.circular(20),
                 ),
         ),

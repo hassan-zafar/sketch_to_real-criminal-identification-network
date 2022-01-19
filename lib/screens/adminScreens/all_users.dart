@@ -11,6 +11,8 @@ import '../../constants.dart';
 import 'comments_n_chat.dart';
 
 class UserNSearch extends StatefulWidget {
+  const UserNSearch({Key? key}) : super(key: key);
+
   // final UserModel currentUser;
   // UserNSearch({this.currentUser});
   @override
