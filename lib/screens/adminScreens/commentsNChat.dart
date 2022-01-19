@@ -2,6 +2,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:sketch_to_real/config/collection_names.dart';
 // import 'package:timeago/timeago.dart' as timeago;
 import 'package:uuid/uuid.dart';
 import 'package:volt_arena/consts/collections.dart';
@@ -114,16 +115,16 @@ class CommentsNChatState extends State<CommentsNChat> {
       chatRoomRef
           .doc(currentUser!.isAdmin != null && currentUser!.isAdmin == true
               ? widget.chatId
-              : currentUser!.id)
+              : currentUser!.userId)
           .collection("chats")
           .doc(commentId)
           .set({
-        "userName": currentUser!.name,
-        "userId": currentUser!.id,
+        "userName": currentUser!.userName,
+        "userId": currentUser!.userId,
         "androidNotificationToken": currentUser!.androidNotificationToken,
         "comment": _commentNMessagesController.text,
         "timestamp": DateTime.now(),
-        "avatarUrl": currentUser!.imageUrl,
+        "avatarUrl": currentUser!.photoUrl,
         "commentId": commentId,
       });
       currentUser!.isAdmin!
