@@ -11,7 +11,6 @@ import 'package:uuid/uuid.dart';
 
 import '../../constants.dart';
 
-
 class CommentsNChat extends StatefulWidget {
   // final String? postId;
   // final String? postOwnerId;
@@ -131,7 +130,7 @@ class CommentsNChatState extends State<CommentsNChat> {
       currentUser!.isAdmin!
           ? null
           : chatListRef
-              .doc(currentUser!.isAdmin! ? widget.chatId : currentUser!.id)
+              .doc(currentUser!.isAdmin! ? widget.chatId : currentUser!.userId)
               .set({
               "userName": currentUser!.userName,
               "userId": currentUser!.userId,
@@ -187,17 +186,17 @@ class CommentsNChatState extends State<CommentsNChat> {
               Expanded(
                 child: buildChat(),
               ),
-              Divider(),
+              const Divider(),
               ListTile(
                 title: TextFormField(
                   controller: _commentNMessagesController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "Write a message...",
                   ),
                 ),
                 trailing: IconButton(
                   onPressed: addChatMessage,
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.send,
                     size: 40.0,
                   ),
@@ -251,13 +250,13 @@ class _CommentsNMessagesState extends State<CommentsNMessages> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 12, right: 12, left: 12),
+      padding: const EdgeInsets.only(bottom: 12, right: 12, left: 12),
       child: buildMessageBubble(context),
     );
   }
 
   buildMessageBubble(BuildContext context) {
-    bool isMe = currentUser!.id == widget.userId;
+    bool isMe = currentUser!.userId == widget.userId;
     return Padding(
       padding: const EdgeInsets.only(left: 14.0, right: 14.0),
       child: Container(
@@ -265,14 +264,14 @@ class _CommentsNMessagesState extends State<CommentsNMessages> {
         decoration: BoxDecoration(
           color: isMe ? Colors.orange : Colors.brown,
           borderRadius: isMe
-              ? BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
+              ? const BorderRadius.only(
+                  bottomLeft: const Radius.circular(20),
                   bottomRight: Radius.circular(20),
                   topLeft: Radius.circular(20),
                 )
-              : BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
+              : const BorderRadius.only(
+                  bottomLeft: const Radius.circular(20),
+                  bottomRight: const Radius.circular(20),
                   topRight: Radius.circular(20),
                 ),
         ),
@@ -291,7 +290,7 @@ class _CommentsNMessagesState extends State<CommentsNMessages> {
                               CachedNetworkImageProvider(widget.avatarUrl!),
                         )
                       : CircleAvatar(backgroundImage: AssetImage(logo)),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Expanded(
@@ -305,14 +304,14 @@ class _CommentsNMessagesState extends State<CommentsNMessages> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text("${widget.userName} : ",
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 14.0,
                                     color: Colors.white)),
                             Flexible(
                               child: Text(
                                 "${widget.comment}",
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 14.0, color: Colors.white),
                               ),
                             ),
