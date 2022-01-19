@@ -336,7 +336,7 @@ class UserResult extends StatelessWidget {
   }
 
   void makeAdminFunc(String msg) {
-    userRef.doc(user.id).update({"isAdmin": !user.isAdmin!});
+    userRef.doc(user.userId).update({"isAdmin": !user.isAdmin!});
     addToFeed(msg);
 
     // BotToast.showText(text: msg);

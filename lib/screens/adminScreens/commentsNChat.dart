@@ -110,7 +110,7 @@ class CommentsNChatState extends State<CommentsNChat> {
   }
 
   addChatMessage() {
-    String commentId = Uuid().v1();
+    String commentId = const Uuid().v1();
     if (_commentNMessagesController.text.trim().length > 1) {
       chatRoomRef
           .doc(currentUser!.isAdmin != null && currentUser!.isAdmin == true
