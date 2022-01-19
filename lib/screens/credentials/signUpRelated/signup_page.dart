@@ -10,18 +10,20 @@ import 'package:sketch_to_real/tools/loading.dart';
 import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 
 class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
+
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
 
 class _SignUpPageState extends State<SignUpPage> {
   bool _obscureText = true;
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _userNameController = TextEditingController();
-  TextEditingController _phoneNoController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _phoneNoController = TextEditingController();
   // TextEditingController _addressController = TextEditingController();
   final _textFormKey = GlobalKey<FormState>();
 
