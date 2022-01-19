@@ -12,4 +12,4 @@ final timelineRef = FirebaseFirestore.instance.collection('timeline');
 final DateTime timestamp = DateTime.now();
 final Reference storageRef = FirebaseStorage.instance.ref();
 bool isAdmin = false;
-UserModel? currentUser;
+AppUserModel? currentUser;

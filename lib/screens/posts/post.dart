@@ -142,7 +142,7 @@ class _PostState extends State<Post> {
         if (!snapshot.hasData) {
           return LoadingIndicator();
         }
-        UserModel user = UserModel.fromDocument(snapshot.data);
+        AppUserModel user = AppUserModel.fromDocument(snapshot.data);
         bool isPostOwner = currentUserId == ownerId;
 
         return Row(

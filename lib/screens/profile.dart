@@ -29,7 +29,7 @@ class _ProfileState extends State<Profile> {
   bool? isFollowing = false;
   int? postCount = 0;
   int? followersCount = 0;
-  int?followingCount = 0;
+  int? followingCount = 0;
   List<Post>? posts = [];
   @override
   void initState() {
@@ -79,14 +79,16 @@ class _ProfileState extends State<Profile> {
     setState(() {
       isLoading = true;
     });
+    print(currentUser!.userId);
     QuerySnapshot snapshot = await postRef
-        .doc(widget.profileId)
+        .doc(currentUser!.userId)
         .collection('userPosts')
         .orderBy('timestamp', descending: true)
         .get();
     setState(() {
       isLoading = false;
       postCount = snapshot.docs.length;
+      print(postCount);
       posts = snapshot.docs.map((doc) => Post.fromDocument(doc)).toList();
     });
   }
@@ -167,8 +169,9 @@ class _ProfileState extends State<Profile> {
 
   editProfile() {
     Get.to(() => EditProfile(
-          currentUserID: currentUserID!,
-        ))!.then((value) {
+              currentUserID: currentUserID!,
+            ))!
+        .then((value) {
       getUser();
 
       setState(() {});
@@ -190,7 +193,8 @@ class _ProfileState extends State<Profile> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0),
             color: isFollowing! ? Colors.grey : Colors.blue,
-            border: Border.all(color: isFollowing! ? Colors.white : Colors.blue),
+            border:
+                Border.all(color: isFollowing! ? Colors.white : Colors.blue),
           ),
           child: Text(
             text!,
@@ -294,7 +298,7 @@ class _ProfileState extends State<Profile> {
         if (!snapshot.hasData) {
           return LoadingIndicator();
         }
-        UserModel user = UserModel.fromDocument(snapshot.data);
+        AppUserModel user = AppUserModel.fromDocument(snapshot.data);
         return Padding(
           padding: EdgeInsets.all(16.0),
           child: Column(
@@ -337,7 +341,8 @@ class _ProfileState extends State<Profile> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   user.userName!,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 14.0),
                 ),
               ),
               Container(

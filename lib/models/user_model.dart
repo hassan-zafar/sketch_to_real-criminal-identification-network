@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class UserModel {
+class AppUserModel {
   final String? userId;
   final String? userName;
   final String? password;
@@ -9,7 +9,7 @@ class UserModel {
   final bool? isAdmin;
   final String? email;
 
-  UserModel({
+  AppUserModel({
     this.userId,
     this.userName,
     this.password,
@@ -31,8 +31,8 @@ class UserModel {
     };
   }
 
-  factory UserModel.fromMap(Map<String, dynamic> map) {
-    return UserModel(
+  factory AppUserModel.fromMap(Map<String, dynamic> map) {
+    return AppUserModel(
       userId: map['userId'],
       userName: map['userName'],
       password: map['password'],
@@ -43,8 +43,8 @@ class UserModel {
     );
   }
 
-  factory UserModel.fromDocument(doc) {
-    return UserModel(
+  factory AppUserModel.fromDocument(doc) {
+    return AppUserModel(
       userId: doc.data()["userId"],
       password: doc.data()["password"],
       userName: doc.data()["userName"],
@@ -62,6 +62,6 @@ class UserModel {
 
   String toJson() => json.encode(toMap());
 
-  factory UserModel.fromJson(String source) =>
-      UserModel.fromMap(json.decode(source));
+  factory AppUserModel.fromJson(String source) =>
+      AppUserModel.fromMap(json.decode(source));
 }

@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
     UserLocalData().setNotLoggedIn();
     String currentUserString = UserLocalData().getUserModel();
     if (currentUserString.isNotEmpty) {
-      currentUser = UserModel.fromMap(json.decode(currentUserString));
+      currentUser = AppUserModel.fromMap(json.decode(currentUserString));
     }
     return GetMaterialApp(
       title: 'Sketch to Real',

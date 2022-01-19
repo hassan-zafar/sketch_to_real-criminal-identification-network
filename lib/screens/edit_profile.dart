@@ -21,7 +21,7 @@ class EditProfile extends StatefulWidget {
 class _EditProfileState extends State<EditProfile> {
   TextEditingController displayNameController = TextEditingController();
   TextEditingController bioTextController = TextEditingController();
-  UserModel? user;
+  AppUserModel? user;
   bool isLoading = false;
   bool _bioValid = true;
   bool _displayNameValid = true;
@@ -42,7 +42,7 @@ class _EditProfileState extends State<EditProfile> {
       isLoading = true;
     });
     DocumentSnapshot doc = await userRef.doc(widget.currentUserID).get();
-    user = UserModel.fromDocument(doc);
+    user = AppUserModel.fromDocument(doc);
     displayNameController.text = user!.userName!;
     // bioTextController.text = user.bio;
     setState(() {

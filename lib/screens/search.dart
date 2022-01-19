@@ -82,7 +82,7 @@ class _SearchState extends State<Search>
         }
         List<UserResult> searchResults = [];
         snapshot.data!.docs.forEach((doc) {
-          UserModel user = UserModel.fromDocument(doc);
+          AppUserModel user = AppUserModel.fromDocument(doc);
           UserResult searchResult = UserResult(user);
           searchResults.add(searchResult);
         });
@@ -116,7 +116,7 @@ showProfile(BuildContext context, {required String profileId}) {
 }
 
 class UserResult extends StatelessWidget {
-  final UserModel user;
+  final AppUserModel user;
   UserResult(this.user);
   @override
   Widget build(BuildContext context) {

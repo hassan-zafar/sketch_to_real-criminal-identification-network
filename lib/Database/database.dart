@@ -13,7 +13,7 @@ class DatabaseMethods {
   // }
 
   Future addUserInfoToFirebase(
-      {required UserModel userModel,
+      {required AppUserModel userModel,
       required String userId,
       required email}) async {
     final Map<String, dynamic> userInfoMap = userModel.toMap();
@@ -54,7 +54,7 @@ class DatabaseMethods {
 
   Future fetchUserInfoFromFirebase({required String uid}) async {
     final DocumentSnapshot _user = await userRef.doc(uid).get();
-    currentUser = UserModel.fromDocument(_user);
+    currentUser = AppUserModel.fromDocument(_user);
     Map userInfoMap = currentUser!.toMap();
     String userModelString = json.encode(userInfoMap);
     UserLocalData().setUserModel(userModelString);

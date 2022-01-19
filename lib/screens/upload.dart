@@ -12,9 +12,9 @@ import 'package:uuid/uuid.dart';
 // import 'package:geolocator/geolocator.dart';
 
 class Upload extends StatefulWidget {
-  final UserModel? currentUser;
+  final AppUserModel? currentUser;
 
-   Upload({this.currentUser});
+  Upload({this.currentUser});
 
   @override
   _UploadState createState() => _UploadState();
@@ -102,7 +102,7 @@ class _UploadState extends State<Upload>
   handleImageFromCamera() async {
     Navigator.pop(context);
     var picker = await ImagePicker().getImage(source: ImageSource.camera);
-    File ?file;
+    File? file;
     print(file!.toString());
     file = File(picker!.path);
     setState(() {
@@ -126,7 +126,7 @@ class _UploadState extends State<Upload>
         FirebaseStorage.instance.ref().child('posts/$postId.jpg');
     UploadTask uploadTask = firebaseStorageRef.putFile(imageFile);
 
-    String ?downloadUrl;
+    String? downloadUrl;
     await uploadTask.whenComplete(() async {
       downloadUrl = await firebaseStorageRef.getDownloadURL();
     });
@@ -135,12 +135,8 @@ class _UploadState extends State<Upload>
   }
 
   createPostInFirestore(
-      {String ?mediaUrl, String ?location, String ?description}) {
-    postRef
-        .doc(widget.currentUser!.userId)
-        .collection("userPosts")
-        .doc(postId)
-        .set({
+      {String? mediaUrl, String? location, String? description}) {
+    postRef.doc(currentUser!.userId).collection("userPosts").doc(postId).set({
       "postId": postId,
       "ownerId": widget.currentUser!.userId,
       "username": widget.currentUser!.userName,

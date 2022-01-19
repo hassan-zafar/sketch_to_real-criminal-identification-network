@@ -8,7 +8,7 @@ import 'package:sketch_to_real/tools/loading.dart';
 import 'package:sketch_to_real/widgets/header.dart';
 
 class Timeline extends StatefulWidget {
-  final UserModel ?currentUser;
+  final AppUserModel ?currentUser;
   Timeline({this.currentUser});
 
   @override
@@ -77,7 +77,7 @@ class _TimelineState extends State<Timeline> {
           }
           List<UserResult> userResults = [];
           snapshot.data!.docs.forEach((doc) {
-            UserModel user = UserModel.fromDocument(doc);
+            AppUserModel user = AppUserModel.fromDocument(doc);
             final bool isAuthUser = user.userId == currentUser!.userId;
             final bool isFollowingUser = followingList!.contains(user.userId);
             //remove auth user from recommended list

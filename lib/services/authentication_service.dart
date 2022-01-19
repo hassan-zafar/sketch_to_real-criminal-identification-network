@@ -46,7 +46,7 @@ class AuthenticationService {
       assert(user != null);
       assert(await user.getIdToken() != null);
       if (user != null) {
-        final UserModel currentUser = UserModel(
+        final AppUserModel currentUser = AppUserModel(
             userId: user.uid,
             userName: userName,
             email: email.trim(),
