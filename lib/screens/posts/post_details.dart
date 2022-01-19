@@ -5,9 +5,7 @@ import 'package:sketch_to_real/Database/database.dart';
 import 'package:sketch_to_real/common_ui_functions.dart';
 import 'package:sketch_to_real/config/collection_names.dart';
 import 'package:sketch_to_real/constants.dart';
-import 'package:sketch_to_real/screens/posts/post.dart';
 import 'package:sketch_to_real/tools/loading.dart';
-import 'package:sketch_to_real/tools/notification_handler.dart';
 import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 import 'package:uuid/uuid.dart';
 
@@ -60,9 +58,9 @@ class _PostDetailsState extends State<PostDetails> {
                         alignment: Alignment.topCenter)),
               ),
               ListView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 320,
                   ),
                   Padding(
@@ -140,13 +138,13 @@ class _PostDetailsState extends State<PostDetails> {
                                       borderRadius: BorderRadius.circular(12),
                                       color: Colors.green,
                                     ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
+                                    child: const Padding(
+                                      padding: EdgeInsets.only(
                                           top: 8.0,
                                           bottom: 8.0,
                                           left: 16,
                                           right: 16),
-                                      child: Icon(Icons.undo),
+                                      child:  Icon(Icons.undo),
                                     ),
                                   ),
                                 ),
@@ -157,7 +155,7 @@ class _PostDetailsState extends State<PostDetails> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   isApproved
@@ -170,14 +168,14 @@ class _PostDetailsState extends State<PostDetails> {
                             });
                           },
                           child: Padding(
-                              padding: EdgeInsets.all(12),
+                              padding: const EdgeInsets.all(12),
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   color: Colors.red,
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(16.0),
                                   child: Center(
                                     child: Text(
                                       "Delete Post Permanently",
@@ -190,7 +188,7 @@ class _PostDetailsState extends State<PostDetails> {
                                 ),
                               )),
                         ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                 ],
@@ -244,7 +242,7 @@ class _PostDetailsState extends State<PostDetails> {
                 left: 20,
                 child: GestureDetector(
                   onTap: () => Navigator.pop(context),
-                  child: Icon(Icons.reply_outlined),
+                  child: const Icon(Icons.reply_outlined),
                 ),
               ),
             ],
@@ -256,5 +254,5 @@ class _PostDetailsState extends State<PostDetails> {
 }
 
 cardHeadingTextStyle() {
-  return TextStyle(fontWeight: FontWeight.bold, fontSize: 16);
+  return const TextStyle(fontWeight: FontWeight.bold, fontSize: 16);
 }
