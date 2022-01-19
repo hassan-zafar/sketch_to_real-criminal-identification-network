@@ -4,8 +4,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sketch_to_real/config/collection_names.dart';
 import 'package:sketch_to_real/models/user_model.dart';
+import 'package:sketch_to_real/tools/loading.dart';
+import 'package:sketch_to_real/tools/notification_handler.dart';
 // import 'package:timeago/timeago.dart' as timeago;
 import 'package:uuid/uuid.dart';
+
+import '../../constants.dart';
 
 
 class CommentsNChat extends StatefulWidget {
@@ -64,7 +68,7 @@ class CommentsNChatState extends State<CommentsNChat> {
         chatHeadId =
             currentUser!.isAdmin != null && currentUser!.isAdmin == true
                 ? widget.chatId
-                : currentUser!.id;
+                : currentUser!.userId;
       });
     }
     getAdmins();
@@ -85,7 +89,7 @@ class CommentsNChatState extends State<CommentsNChat> {
           chatRoomRef
               .doc(currentUser!.isAdmin != null && currentUser!.isAdmin == true
                   ? widget.chatId
-                  : currentUser!.id)
+                  : currentUser!.userId)
               .collection("chats")
               .orderBy("timestamp", descending: false)
               .snapshots(),
@@ -129,8 +133,8 @@ class CommentsNChatState extends State<CommentsNChat> {
           : chatListRef
               .doc(currentUser!.isAdmin! ? widget.chatId : currentUser!.id)
               .set({
-              "userName": currentUser!.name,
-              "userId": currentUser!.id,
+              "userName": currentUser!.userName,
+              "userId": currentUser!.userId,
               "comment": _commentNMessagesController.text,
               "timestamp": DateTime.now(),
               "androidNotificationToken": widget.chatNotificationToken ??
@@ -173,7 +177,7 @@ class CommentsNChatState extends State<CommentsNChat> {
           backgroundColor: Colors.transparent,
           title: Text(
             currentUser!.isAdmin! ? "Manage Queries" : "Contact Admin",
-            style: TextStyle(color: Colors.black),
+            style: const TextStyle(color: Colors.black),
           ),
         ),
         body: Padding(
