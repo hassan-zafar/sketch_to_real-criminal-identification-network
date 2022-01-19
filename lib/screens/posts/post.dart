@@ -9,7 +9,7 @@ import 'package:sketch_to_real/models/user_model.dart';
 import 'package:sketch_to_real/screens/comments.dart';
 import 'package:sketch_to_real/screens/posts/post_details.dart';
 import 'package:sketch_to_real/screens/profile.dart';
-import 'package:sketch_to_real/tools/customImages.dart';
+import 'package:sketch_to_real/tools/custom_images.dart';
 import 'package:sketch_to_real/tools/loading.dart';
 import 'package:animator/animator.dart';
 import 'package:get/get.dart';

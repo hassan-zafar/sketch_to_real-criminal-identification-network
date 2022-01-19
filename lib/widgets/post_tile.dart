@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sketch_to_real/screens/posts/post.dart';
 import 'package:sketch_to_real/screens/posts/post_screen.dart';
-import 'package:sketch_to_real/tools/customImages.dart';
+import 'package:sketch_to_real/tools/custom_images.dart';
 
 class PostTile extends StatelessWidget {
   final Post? post;

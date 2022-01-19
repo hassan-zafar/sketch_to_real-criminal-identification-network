@@ -5,6 +5,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../main.dart';
+
 Future<Map<String, dynamic>?> sendAndRetrieveMessage(
     {required String token,
     required String message,

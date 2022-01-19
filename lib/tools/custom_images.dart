@@ -6,11 +6,11 @@ Widget cachedNetworkImage(String mediaUrl) {
   return Container(
     decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
     child: CachedNetworkImage(
-      errorWidget: (context, url, error) => Icon(Icons.error),
+      errorWidget: (context, url, error) => const Icon(Icons.error),
       imageUrl: mediaUrl != null ? mediaUrl : "",
       fit: BoxFit.cover,
       placeholder: (context, url) => Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: LoadingIndicator(),
       ),
     ),
