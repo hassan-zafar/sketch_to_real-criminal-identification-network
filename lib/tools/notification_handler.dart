@@ -28,7 +28,7 @@ Future<Map<String, dynamic>?> sendAndRetrieveMessage(
           <String, dynamic>{
             'notification': <String, dynamic>{
               'body': message,
-              'title': '$title',
+              'title': title,
               imageUrl == null ? "" : "image": imageUrl
             },
             'priority': 'high',
