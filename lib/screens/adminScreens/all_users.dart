@@ -246,49 +246,47 @@ class _UserNSearchState extends State<UserNSearch>
 
 class UserResult extends StatelessWidget {
   final AppUserModel user;
-  UserResult(this.user);
+  const UserResult(this.user, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          GestureDetector(
-            onLongPress: () => makeAdmin(context),
-            onTap: () {
-              if (user.userId != currentUser!.userId) {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => CommentsNChat(
-                      chatId: user.userId,
-                      chatNotificationToken: user.androidNotificationToken),
-                ));
-              }
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GlassContainer(
-                opacity: 0.6,
-                shadowStrength: 8,
-                child: ListTile(
-                  leading: const CircleAvatar(
-                    backgroundColor: Colors.grey,
-                    child: const Icon(Icons.person),
-                  ),
-                  title: Text(
-                    user.userName.toString(),
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(
-                    user.userName.toString(),
-                  ),
-                  trailing: Text(user.isAdmin != null && user.isAdmin == true
-                      ? "Admin"
-                      : "User"),
+    return Column(
+      children: <Widget>[
+        GestureDetector(
+          onLongPress: () => makeAdmin(context),
+          onTap: () {
+            if (user.userId != currentUser!.userId) {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => CommentsNChat(
+                    chatId: user.userId,
+                    chatNotificationToken: user.androidNotificationToken),
+              ));
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GlassContainer(
+              opacity: 0.6,
+              shadowStrength: 8,
+              child: ListTile(
+                leading: const CircleAvatar(
+                  backgroundColor: Colors.grey,
+                  child:  Icon(Icons.person),
                 ),
+                title: Text(
+                  user.userName.toString(),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text(
+                  user.userName.toString(),
+                ),
+                trailing: Text(user.isAdmin != null && user.isAdmin == true
+                    ? "Admin"
+                    : "User"),
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

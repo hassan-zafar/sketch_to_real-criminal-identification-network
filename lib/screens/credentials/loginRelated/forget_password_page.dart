@@ -5,12 +5,14 @@ import 'package:sketch_to_real/tools/loading.dart';
 import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
+  const ForgetPasswordPage({Key? key}) : super(key: key);
+
   @override
   _ForgetPasswordPageState createState() => _ForgetPasswordPageState();
 }
 
 class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
-  TextEditingController _emailController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final _textFormKey = GlobalKey<FormState>();
 
   bool _isLoading = false;
