@@ -43,7 +43,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     key: _textFormKey,
                     child: Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Padding(
@@ -55,7 +55,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 height: 90,
                               )),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         edittedTextField(
@@ -64,7 +64,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           isPass: false,
                           lablelText: "Username",
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         edittedTextField(
@@ -74,7 +74,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           isEmail: true,
                           lablelText: "Email Address",
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         edittedTextField(
@@ -85,7 +85,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           lablelText: "Password",
                           obscureText: _obscureText,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         edittedTextField(
@@ -96,7 +96,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           lablelText: "Confirm Password",
                           obscureText: _obscureText,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         edittedTextField(
@@ -106,7 +106,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           valText: 'Phone number Too Short',
                           lablelText: "Phone NUmber",
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
 
@@ -123,7 +123,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                         ),
 
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
 // Move to Sign Up Page
