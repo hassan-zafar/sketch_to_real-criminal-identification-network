@@ -5,7 +5,7 @@ import 'package:sketch_to_real/tools/customImages.dart';
 
 class PostTile extends StatelessWidget {
   final Post? post;
-  PostTile(this.post);
+  const PostTile(this.post, {Key? key}) : super(key: key);
 
   showPost(context) {
     Navigator.push(
