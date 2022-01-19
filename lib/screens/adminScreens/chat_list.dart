@@ -5,7 +5,7 @@ import 'package:sketch_to_real/config/collection_names.dart';
 import 'package:sketch_to_real/tools/loading.dart';
 
 import '../../constants.dart';
-import 'commentsNChat.dart';
+import 'comments_n_chat.dart';
 
 
 class ChatLists extends StatefulWidget {

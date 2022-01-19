@@ -7,9 +7,8 @@ import 'package:sketch_to_real/models/user_model.dart';
 import 'package:sketch_to_real/services/authentication_service.dart';
 import 'package:sketch_to_real/tools/loading.dart';
 
-
 import '../../constants.dart';
-import 'commentsNChat.dart';
+import 'comments_n_chat.dart';
 
 class UserNSearch extends StatefulWidget {
   // final UserModel currentUser;
@@ -54,11 +53,11 @@ class _UserNSearchState extends State<UserNSearch>
         decoration: InputDecoration(
             hintText: "Search",
             // hintStyle: TextStyle(color: Colors.black),
-            prefixIcon: Icon(
+            prefixIcon: const Icon(
               Icons.search,
             ),
             suffixIcon: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.clear,
                 // color: ColorsConsts.subTitle,
               ),
@@ -136,7 +135,7 @@ class _UserNSearchState extends State<UserNSearch>
                 }
               });
               return ListView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 children: <Widget>[
                   // currentUser!.isAdmin!
                   // ?
@@ -151,7 +150,7 @@ class _UserNSearchState extends State<UserNSearch>
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(8),
+                                padding: const EdgeInsets.all(8),
                                 child: GestureDetector(
                                   onTap: () {
                                     setState(() {
@@ -165,7 +164,7 @@ class _UserNSearchState extends State<UserNSearch>
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
                                         "All Users ${userResults.length}",
-                                        style: TextStyle(fontSize: 20.0),
+                                        style: const TextStyle(fontSize: 20.0),
                                       ),
                                     ),
                                   ),
@@ -178,7 +177,7 @@ class _UserNSearchState extends State<UserNSearch>
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(8),
+                                padding: const EdgeInsets.all(8),
                                 child: GestureDetector(
                                   onTap: () {
                                     setState(() {
@@ -192,7 +191,7 @@ class _UserNSearchState extends State<UserNSearch>
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
                                         "All Admins ${allAdmins.length}",
-                                        style: TextStyle(fontSize: 20.0),
+                                        style: const TextStyle(fontSize: 20.0),
                                       ),
                                     ),
                                   ),
@@ -209,12 +208,12 @@ class _UserNSearchState extends State<UserNSearch>
                       ? Column(
                           children: allAdmins,
                         )
-                      : Text(""),
+                      : const Text(""),
                   typeSelected == 'users'
                       ? Column(
                           children: userResults,
                         )
-                      : Text(''),
+                      : const Text(''),
                 ],
               );
             }),
@@ -233,8 +232,8 @@ class _UserNSearchState extends State<UserNSearch>
                     borderRadius: BorderRadius.circular(12),
                     color: Colors.red,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text("LogOut"),
                   )),
             ))
@@ -268,13 +267,13 @@ class UserResult extends StatelessWidget {
                 opacity: 0.6,
                 shadowStrength: 8,
                 child: ListTile(
-                  leading: CircleAvatar(
+                  leading: const CircleAvatar(
                     backgroundColor: Colors.grey,
-                    child: Icon(Icons.person),
+                    child: const Icon(Icons.person),
                   ),
                   title: Text(
                     user.userName.toString(),
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
                     user.userName.toString(),
@@ -303,7 +302,7 @@ class UserResult extends StatelessWidget {
                         Navigator.pop(context);
                         makeAdminFunc("Rank changed to User");
                       },
-                      child: Text(
+                      child: const Text(
                         'Make User',
                       ),
                     )
@@ -312,7 +311,7 @@ class UserResult extends StatelessWidget {
                         Navigator.pop(context);
                         makeAdminFunc("Upgraded to Admin");
                       },
-                      child: Text(
+                      child: const Text(
                         'Make Admin',
                       ),
                     ),
@@ -321,14 +320,14 @@ class UserResult extends StatelessWidget {
                   Navigator.pop(context);
                   deleteUser(user.email!, user.password!);
                 },
-                child: Text(
+                child: const Text(
                   'Delete User',
                   style: TextStyle(color: Colors.red),
                 ),
               ),
               SimpleDialogOption(
                 onPressed: () => Navigator.pop(context),
-                child: Text('Cancel'),
+                child: const Text('Cancel'),
               )
             ],
           );

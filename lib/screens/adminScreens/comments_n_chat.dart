@@ -3,13 +3,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sketch_to_real/config/collection_names.dart';
+import 'package:sketch_to_real/models/user_model.dart';
 // import 'package:timeago/timeago.dart' as timeago;
 import 'package:uuid/uuid.dart';
-import 'package:volt_arena/consts/collections.dart';
-import 'package:volt_arena/consts/colors.dart';
-import 'package:volt_arena/consts/universal_variables.dart';
-import 'package:volt_arena/models/users.dart';
-import 'package:volt_arena/services/notificationHandler.dart';
+
 
 class CommentsNChat extends StatefulWidget {
   // final String? postId;
