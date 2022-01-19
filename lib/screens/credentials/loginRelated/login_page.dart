@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import 'forget_password_page.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({this.currentUserString});
+  LoginPage({Key? key, this.currentUserString}) : super(key: key);
   String? currentUserString;
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -20,8 +20,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _obscureText = true;
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final _textFormKey = GlobalKey<FormState>();
 
   bool _isLoading = false;
