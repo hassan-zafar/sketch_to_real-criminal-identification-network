@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sketch_to_real/Database/database.dart';
+import 'package:sketch_to_real/config/collection_names.dart';
 import 'package:sketch_to_real/models/user_model.dart';
 import 'package:sketch_to_real/tools/custom_toast.dart';
 
@@ -28,12 +29,32 @@ class AuthenticationService {
     }
   }
 
+  Future deleteUser({required String email, required String password}) async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+
+    try {
+      User user = _firebaseAuth.currentUser!;
+      AuthCredential credentials =
+          EmailAuthProvider.credential(email: email, password: password);
+      print(user);
+      UserCredential result =
+          await user.reauthenticateWithCredential(credentials);
+      userRef.doc(user.uid).delete();
+
+      await result.user!.delete();
+      return true;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
   Future<User?> signUp({
     final String? password,
-    final String ?userName,
+    final String? userName,
     final timestamp,
     final String? email,
-    final bool ?isAdmin,
+    final bool? isAdmin,
   }) async {
     print("1st stop");
     try {
