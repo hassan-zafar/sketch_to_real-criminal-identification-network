@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
               PageView(
                 controller: pageController,
                 onPageChanged: onPageChanged,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 children: [
                   Timeline(currentUser: currentUser),
                   DrawingPage(),
@@ -69,29 +69,29 @@ class _HomePageState extends State<HomePage> {
           bottomNavigationBar: GlassContainer(
             opacity: 0.2,
             blur: 8,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10),
+            borderRadius: const BorderRadius.only(
+              topLeft:  Radius.circular(10),
               topRight: Radius.circular(10),
             ),
             child: BottomNavigationBar(
-              backgroundColor: Color(0x00ffffff),
+              backgroundColor: const Color(0x00ffffff),
               currentIndex: pageIndex,
               onTap: onTap,
               elevation: 0,
               showUnselectedLabels: false,
               unselectedItemColor: Colors.black,
               selectedItemColor: Colors.white,
-              items: [
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.track_changes_outlined),
+              items: const[
+                 BottomNavigationBarItem(
+                    icon:  Icon(Icons.track_changes_outlined),
                     label: "Timeline"),
-                BottomNavigationBarItem(
+                 BottomNavigationBarItem(
                     icon: Icon(Icons.format_paint_outlined), label: "Draw"),
-                BottomNavigationBarItem(
+                 BottomNavigationBarItem(
                     icon: Icon(Icons.upload_outlined), label: "Upload"),
                 // BottomNavigationBarItem(
                 //     icon: Icon(Icons.search), label: "Search"),
-                BottomNavigationBarItem(
+                 BottomNavigationBarItem(
                     icon: Icon(Icons.person), label: "Extras")
               ],
             ),
