@@ -142,10 +142,10 @@ class _LoginPageState extends State<LoginPage> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         const ForgetPasswordPage())),
-                            child: GlassContainer(
-                              child: const Padding(
+                            child: const GlassContainer(
+                              child: Padding(
                                 padding: EdgeInsets.all(8.0),
-                                child: const Hero(
+                                child: Hero(
                                   tag: "passFor",
                                   child: Text(
                                     "Forgot Password?",
