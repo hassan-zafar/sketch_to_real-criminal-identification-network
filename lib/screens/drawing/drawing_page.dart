@@ -23,7 +23,7 @@ class DrawingPage extends StatefulWidget {
 
 class _DrawingPageState extends State<DrawingPage> {
   List<DrawingArea> points = [];
-  Widget imageOutput;
+  List<Widget> imageOutput;
   Image img1;
   TextEditingController ipAddressController = TextEditingController();
 
@@ -111,9 +111,13 @@ class _DrawingPageState extends State<DrawingPage> {
       var response =
           await http.post(Uri.parse(url), body: body, headers: headers);
       final Map<String, dynamic> responseData = json.decode(response.body);
-      String outputBytes = responseData['image'];
-      print(outputBytes.substring(2, outputBytes.length - 1));
-      displayResponseImage(outputBytes.substring(2, outputBytes.length - 1));
+      for (int i = 0; i < 3; i++) {
+        List<String> outputBytes = [];
+        outputBytes.add(responseData['image$i']);
+        print(outputBytes[i].substring(2, outputBytes[i].length - 1));
+        displayResponseImage(
+            outputBytes[i].substring(2, outputBytes.length - 1), i);
+      }
     } catch (e) {
       print(e);
       print("Error Has Occured");
@@ -121,10 +125,10 @@ class _DrawingPageState extends State<DrawingPage> {
     }
   }
 
-  void displayResponseImage(String bytes) async {
+  void displayResponseImage(String bytes, int index) async {
     Uint8List convertedBytes = base64Decode(bytes);
     setState(() {
-      imageOutput = SizedBox(
+      imageOutput[index] = SizedBox(
         width: 256,
         height: 256,
         child: Image.memory(
@@ -220,7 +224,15 @@ class _DrawingPageState extends State<DrawingPage> {
               child: SizedBox(
                 width: 256,
                 height: 256,
-                child: imageOutput,
+                child: imageOutput[0],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: SizedBox(
+                width: 256,
+                height: 256,
+                child: imageOutput[1],
               ),
             ),
           ],
