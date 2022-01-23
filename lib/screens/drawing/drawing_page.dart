@@ -58,7 +58,10 @@ class _DrawingPageState extends State<DrawingPage> {
     // imageUploadRequest.fields['ext'] = mimeTypeData[1];
     // imageUploadRequest.files.add(fileXd);
 
-    fetchResponse(base64Image: base64Img, ipAddress: ipAddressController.text);
+    fetchResponse(
+        base64Image: base64Img,
+        ipAddress: ipAddressController.text,
+        isUploaded: true);
   }
 
   void loadImage(File image) {
@@ -95,12 +98,17 @@ class _DrawingPageState extends State<DrawingPage> {
     final listBytes = Uint8List.view(pngBytes.buffer);
     String base64 = base64Encode(listBytes);
     print(base64);
-    fetchResponse(ipAddress: ipAddressController.text, base64Image: base64);
+    fetchResponse(
+        ipAddress: ipAddressController.text,
+        base64Image: base64,
+        isUploaded: false);
   }
 
   void fetchResponse(
-      {var base64Image, String ipAddress = "172.20.10.4"}) async {
-    var data = {'image': base64Image};
+      {var base64Image,
+      String ipAddress = "172.20.10.4",
+      bool isUploaded}) async {
+    var data = {'image': base64Image, 'uploaded': isUploaded};
     var url = 'http://$ipAddress:5000/predict';
     Map<String, String> headers = {
       'Content-type': 'application/json',
@@ -113,11 +121,14 @@ class _DrawingPageState extends State<DrawingPage> {
           await http.post(Uri.parse(url), body: body, headers: headers);
       final Map<String, dynamic> responseData = json.decode(response.body);
       for (int i = 0; i < 3; i++) {
-        List<String> outputBytes = [];
-        outputBytes.add(responseData['image$i']);
-        print(outputBytes[i].substring(2, outputBytes[i].length - 1));
+        // List<String> outputBytes = [];
+        String outputBytes;
+        print(responseData[i]);
+        // outputBytes.add(responseData['image$i']);
+        outputBytes = responseData['image0'];
+        print(outputBytes.substring(2, outputBytes.length - 1));
         displayResponseImage(
-            outputBytes[i].substring(2, outputBytes.length - 1), i);
+            outputBytes.substring(2, outputBytes.length - 1), i);
       }
     } catch (e) {
       print(e);
@@ -228,14 +239,14 @@ class _DrawingPageState extends State<DrawingPage> {
                 child: imageOutput,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: SizedBox(
-                width: 256,
-                height: 256,
-                child: imageOutput,
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(10.0),
+            //   child: SizedBox(
+            //     width: 256,
+            //     height: 256,
+            //     child: imageOutput,
+            //   ),
+            // ),
           ],
         ),
       ),
