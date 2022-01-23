@@ -23,7 +23,7 @@ class DrawingPage extends StatefulWidget {
 
 class _DrawingPageState extends State<DrawingPage> {
   List<DrawingArea> points = [];
-  List<Widget> imageOutput;
+  Widget imageOutput;
   Image img1;
   TextEditingController ipAddressController = TextEditingController();
 
@@ -99,7 +99,7 @@ class _DrawingPageState extends State<DrawingPage> {
   }
 
   void fetchResponse(
-      {var base64Image, String ipAddress = "192.168.42.18"}) async {
+      {var base64Image, String ipAddress = "172.20.10.4"}) async {
     var data = {'image': base64Image};
     var url = 'http://$ipAddress:5000/predict';
     Map<String, String> headers = {
@@ -129,7 +129,7 @@ class _DrawingPageState extends State<DrawingPage> {
   void displayResponseImage(String bytes, int index) async {
     Uint8List convertedBytes = base64Decode(bytes);
     setState(() {
-      imageOutput[index] = SizedBox(
+      imageOutput = SizedBox(
         width: 256,
         height: 256,
         child: Image.memory(
@@ -225,7 +225,7 @@ class _DrawingPageState extends State<DrawingPage> {
               child: SizedBox(
                 width: 256,
                 height: 256,
-                child: imageOutput[0],
+                child: imageOutput,
               ),
             ),
             Padding(
@@ -233,7 +233,7 @@ class _DrawingPageState extends State<DrawingPage> {
               child: SizedBox(
                 width: 256,
                 height: 256,
-                child: imageOutput[1],
+                child: imageOutput,
               ),
             ),
           ],
