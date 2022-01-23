@@ -32,6 +32,7 @@ class _DrawingPageState extends State<DrawingPage> {
     File file = File(filePickerResult.files.single.path);
     loadImage(file);
     final zxc = await file.readAsBytes();
+    base64Encode(zxc);
     final asd = Uint8List.view(zxc.buffer);
     // List<int> asd = await file.readAsBytesSync();
     img1;
