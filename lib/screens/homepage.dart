@@ -5,10 +5,11 @@ import 'package:sketch_to_real/screens/timeline.dart';
 import 'package:sketch_to_real/screens/upload.dart';
 import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 import '../constants.dart';
+import 'adminScreens/all_users.dart';
 import 'drawing/drawing_page.dart';
 
 bool isAdmin = false;
-String ?userUid;
+String? userUid;
 String? email;
 String? userName;
 
@@ -62,6 +63,7 @@ class _HomePageState extends State<HomePage> {
                   Upload(currentUser: currentUser),
                   // Search(),
                   Profile(profileId: currentUser!.userId!),
+                  const UserNSearch(),
                 ],
               ),
             ],
@@ -70,7 +72,7 @@ class _HomePageState extends State<HomePage> {
             opacity: 0.2,
             blur: 8,
             borderRadius: const BorderRadius.only(
-              topLeft:  Radius.circular(10),
+              topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
             ),
             child: BottomNavigationBar(
@@ -81,18 +83,20 @@ class _HomePageState extends State<HomePage> {
               showUnselectedLabels: false,
               unselectedItemColor: Colors.black,
               selectedItemColor: Colors.white,
-              items: const[
-                 BottomNavigationBarItem(
-                    icon:  Icon(Icons.track_changes_outlined),
+              items: const [
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.track_changes_outlined),
                     label: "Timeline"),
-                 BottomNavigationBarItem(
+                BottomNavigationBarItem(
                     icon: Icon(Icons.format_paint_outlined), label: "Draw"),
-                 BottomNavigationBarItem(
+                BottomNavigationBarItem(
                     icon: Icon(Icons.upload_outlined), label: "Upload"),
                 // BottomNavigationBarItem(
                 //     icon: Icon(Icons.search), label: "Search"),
-                 BottomNavigationBarItem(
-                    icon: Icon(Icons.person), label: "Extras")
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.person), label: "Profile"),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.dashboard), label: "All Users")
               ],
             ),
           ),

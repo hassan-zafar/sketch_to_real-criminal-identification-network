@@ -154,7 +154,7 @@ class _DrawingPageState extends State<DrawingPage> {
       'Content-type': 'application/json',
       'Accept': 'application/json',
       'Connection': 'Keep-Alive'
-    };
+    };  
 
     var body = json.encode(data);
     try {
