@@ -32,14 +32,14 @@ class _DrawingPageState extends State<DrawingPage> {
     File file = File(filePickerResult.files.single.path);
     loadImage(file);
     final zxc = await file.readAsBytes();
-    base64Encode(zxc);
-    final asd = Uint8List.view(zxc.buffer);
+    // base64Encode(zxc);
+    // final asd = Uint8List.view(zxc.buffer);
     // List<int> asd = await file.readAsBytesSync();
     img1;
     print("file:$file");
 
-    String base64Img = base64Encode(asd);
-    base64Img = base64Img.substring(1, base64Img.length);
+    String base64Img = base64Encode(zxc);
+    // base64Img = base64Img.substring(1, base64Img.length);
     print("base64Img:$base64Img");
 
     // XFile picker = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -73,6 +73,46 @@ class _DrawingPageState extends State<DrawingPage> {
       );
     });
   }
+  // sendImageToServer(File imageFile) async {
+  //   var stream =  http.ByteStream(imageFile.openRead());
+  //   stream.cast();
+  //   var length = await imageFile.length();
+  //   print(length);
+
+  //   //this ip is my network's IPv4 ( I connected both my laptop and mobile
+  //   //to this WiFi while establishing the connection)
+
+  //   var uri = Uri.parse('http://192.168.1.103:5000/prediction');
+  //   var request =  http.MultipartRequest("POST", uri);
+  //   var multipartFile =  http.MultipartFile('file', stream, length,
+  //       filename:
+  //           basename(imageFile.path));
+
+  //   request.files.add(multipartFile);
+  //   var response = await request.send();
+  //   var result = await response.stream.bytesToString();
+
+  //   final Map<String, dynamic> responseJson =
+  //       json.decode(result.toString()) as Map<String, dynamic>;
+  //   print(responseJson.toString());
+
+  //   pre = responseJson["prediction"];
+  //   print(pre);
+
+  //   setState(() {
+  //     prediction = pre;
+  //   });
+  // }
+
+  // Future getImage() async {
+  //   final image = await picker.getImage(source: ImageSource.gallery);
+  //   sendImageToServer(File(image.path));
+
+  //   setState(() {
+  //     fileImage = File(image.path);
+  //     sendImageToServer(fileImage);
+  //   });
+  // }
 
   void saveImage(List<DrawingArea> points) async {
     final recorder = ui.PictureRecorder();
@@ -115,6 +155,7 @@ class _DrawingPageState extends State<DrawingPage> {
       'Accept': 'application/json',
       'Connection': 'Keep-Alive'
     };
+
     var body = json.encode(data);
     try {
       var response =
