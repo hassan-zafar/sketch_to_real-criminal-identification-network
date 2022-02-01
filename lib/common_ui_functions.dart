@@ -24,6 +24,7 @@ List<BoxShadow> bxShadow = [
       blurRadius: 5,
       offset: Offset(-4, -4)),
 ];
+
 buildSignUpLoginButton(
     {required BuildContext context,
     required String btnText,
