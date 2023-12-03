@@ -7,8 +7,8 @@ class DrawingArea {
 }
 
 class MyCustomPainter extends CustomPainter {
-  List<DrawingArea> points;
-  MyCustomPainter({@required List<DrawingArea> ?points})
+  List<DrawingArea?>? points;
+  MyCustomPainter({@required List<DrawingArea?>? points})
       : points = points!.toList();
 
   @override
@@ -18,13 +18,13 @@ class MyCustomPainter extends CustomPainter {
     canvas.drawRect(rect, background);
     canvas.clipRect(rect);
 
-    for (int x = 0; x < points.length - 1; x++) {
-      if (points[x] != null && points[x + 1] != null) {
+    for (int x = 0; x < points!.length - 1; x++) {
+      if (points![x] != null && points![x + 1] != null) {
         canvas.drawLine(
-            points[x].points!, points[x + 1].points!, points[x].areaPaint!);
-      } else if (points[x] != null && points[x + 1] == null) {
+            points![x]!.points!, points![x + 1]!.points!, points![x]!.areaPaint!);
+      } else if (points![x] != null && points![x + 1] == null) {
         canvas.drawPoints(
-            PointMode.points, [points[x].points!], points[x].areaPaint!);
+            PointMode.points, [points![x]!.points!], points![x]!.areaPaint!);
       }
     }
   }

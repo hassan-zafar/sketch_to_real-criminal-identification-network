@@ -56,17 +56,17 @@ class _UploadState extends State<Upload>
 
   Container buildSplashScreen() {
     return Container(
-      color: Theme.of(context).accentColor.withOpacity(0.6),
+      color: Theme.of(context).canvasColor.withOpacity(0.6),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           SvgPicture.asset('assets/images/upload.svg', height: 260.0),
           Padding(
             padding: const EdgeInsets.only(top: 20.0),
-            child: RaisedButton(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
+            child: ElevatedButton(
+                // shape: RoundedRectangleBorder(
+                //   borderRadius: BorderRadius.circular(8.0),
+                // ),
                 child: const Text(
                   "Upload Image",
                   style: TextStyle(
@@ -74,7 +74,7 @@ class _UploadState extends State<Upload>
                     fontSize: 22.0,
                   ),
                 ),
-                color: Colors.deepOrange,
+                // color: Colors.deepOrange,
                 onPressed: () => selectImage(context)),
           ),
         ],
@@ -201,7 +201,7 @@ class _UploadState extends State<Upload>
           style: TextStyle(color: Colors.black),
         ),
         actions: [
-          FlatButton(
+          ElevatedButton(
             onPressed: isUploading ? null : () => handleSubmit(),
             child: const Text(
               "Post",

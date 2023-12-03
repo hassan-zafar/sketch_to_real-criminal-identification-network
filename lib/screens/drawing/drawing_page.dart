@@ -1,4 +1,3 @@
-//@dart=2.9
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -22,14 +21,14 @@ class DrawingPage extends StatefulWidget {
 }
 
 class _DrawingPageState extends State<DrawingPage> {
-  List<DrawingArea> points = [];
-  Widget imageOutput;
-  Image img1;
+  List<DrawingArea?>? points = [];
+  Widget? imageOutput;
+  Image? img1;
   TextEditingController ipAddressController = TextEditingController();
 
   void pickFile() async {
-    FilePickerResult filePickerResult = await FilePicker.platform.pickFiles();
-    File file = File(filePickerResult.files.single.path);
+    FilePickerResult? filePickerResult = await FilePicker.platform.pickFiles();
+    File file = File(filePickerResult!.files.single.path!);
     loadImage(file);
     final zxc = await file.readAsBytes();
     // base64Encode(zxc);
@@ -114,7 +113,7 @@ class _DrawingPageState extends State<DrawingPage> {
   //   });
   // }
 
-  void saveImage(List<DrawingArea> points) async {
+  void saveImage(List<DrawingArea?>? points) async {
     final recorder = ui.PictureRecorder();
     final canvas = Canvas(recorder,
         Rect.fromPoints(const Offset(0.0, 0.0), const Offset(200.0, 200.0)));
@@ -127,15 +126,15 @@ class _DrawingPageState extends State<DrawingPage> {
       ..color = Colors.black;
 
     canvas.drawRect(const Rect.fromLTWH(0, 0, 256, 256), paint2);
-    for (int i = 0; i < points.length - 1; i++) {
+    for (int i = 0; i < points!.length - 1; i++) {
       if (points[i] != null && points[i + 1] != null) {
-        canvas.drawLine(points[i].points, points[i + 1].points, paint);
+        canvas.drawLine(points[i]!.points!, points[i + 1]!.points!, paint);
       }
     }
     final picture = recorder.endRecording();
     final img = await picture.toImage(256, 256);
     final pngBytes = await img.toByteData(format: ui.ImageByteFormat.png);
-    final listBytes = Uint8List.view(pngBytes.buffer);
+    final listBytes = Uint8List.view(pngBytes!.buffer);
     String base64 = base64Encode(listBytes);
     print(base64);
     fetchResponse(
@@ -147,7 +146,7 @@ class _DrawingPageState extends State<DrawingPage> {
   void fetchResponse(
       {var base64Image,
       String ipAddress = "172.20.10.4",
-      bool isUploaded}) async {
+      required bool isUploaded}) async {
     var data = {'image': base64Image, 'uploaded': isUploaded};
     var url = 'http://$ipAddress:5000/predict';
     Map<String, String> headers = {
@@ -218,14 +217,14 @@ class _DrawingPageState extends State<DrawingPage> {
                 height: 256,
                 child: GestureDetector(
                   onPanEnd: (details) {
-                    saveImage(points);
+                    saveImage(points!);
                     setState(() {
-                      points.add(null);
+                      points!.add(null);
                     });
                   },
                   onPanDown: (details) {
                     setState(() {
-                      points.add(DrawingArea(
+                      points!.add(DrawingArea(
                           points: details.localPosition,
                           areaPaint: Paint()
                             ..color = Colors.white
@@ -236,7 +235,7 @@ class _DrawingPageState extends State<DrawingPage> {
                   },
                   onPanUpdate: (details) {
                     setState(() {
-                      points.add(DrawingArea(
+                      points!.add(DrawingArea(
                           points: details.localPosition,
                           areaPaint: Paint()
                             ..color = Colors.white
@@ -249,7 +248,7 @@ class _DrawingPageState extends State<DrawingPage> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: CustomPaint(
-                        painter: MyCustomPainter(points: points),
+                        painter: MyCustomPainter(points: points!),
                       ),
                     ),
                   ),
@@ -260,7 +259,7 @@ class _DrawingPageState extends State<DrawingPage> {
               children: [
                 IconButton(
                   onPressed: () => setState(() {
-                    points.clear();
+                    points!.clear();
                   }),
                   icon: const Icon(Icons.clear),
                 ),

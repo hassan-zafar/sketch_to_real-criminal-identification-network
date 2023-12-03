@@ -184,7 +184,7 @@ class _ProfileState extends State<Profile> {
   }) {
     return Container(
       padding: const EdgeInsets.only(top: 2),
-      child: FlatButton(
+      child: ElevatedButton(
         onPressed: function,
         child: Container(
           alignment: Alignment.center,

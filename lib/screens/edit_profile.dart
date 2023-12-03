@@ -126,10 +126,10 @@ class _EditProfileState extends State<EditProfile> {
           _isUpdating = false;
         });
         SnackBar snackbar = const SnackBar(content: Text("Profile Updated"));
-        _scaffoldKey.currentState!.showSnackBar(snackbar);
-        Timer(const Duration(seconds: 2), () {
-          Navigator.pop(context);
-        });
+        // _scaffoldKey.currentState!.showSnackBar(snackbar);
+        // Timer(const Duration(seconds: 2), () {
+        //   Navigator.pop(context);
+        // });
       });
     }
   }
@@ -204,7 +204,7 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(25.0),
-                          child: FlatButton.icon(
+                          child: ElevatedButton.icon(
                             onPressed: () {
                               // logout()
                             },

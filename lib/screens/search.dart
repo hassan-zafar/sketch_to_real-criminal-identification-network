@@ -57,7 +57,7 @@ class _SearchState extends State<Search>
 
   AppBar buildSearchField(context) {
     return AppBar(
-      backgroundColor: Theme.of(context).accentColor,
+      backgroundColor: Theme.of(context).canvasColor,
       title: TextFormField(
         controller: searchController,
         decoration: InputDecoration(
@@ -98,7 +98,7 @@ class _SearchState extends State<Search>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      backgroundColor: Theme.of(context).accentColor,
+      backgroundColor: Theme.of(context).canvasColor,
       appBar: buildSearchField(context),
       body:
           searchResultsFuture == null ? buildNoContent() : buildSearchResult(),
