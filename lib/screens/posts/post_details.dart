@@ -1,4 +1,4 @@
-import 'package:bot_toast/bot_toast.dart';
+// import 'package:bot_toast/bot_toast.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sketch_to_real/Database/database.dart';
@@ -164,7 +164,7 @@ class _PostDetailsState extends State<PostDetails> {
                           onTap: () {
                             postRef.doc(widget.postId).delete().then((value) {
                               Navigator.pop(context);
-                              BotToast.showText(text: "Post Deleted");
+                              // BotToast.showText(text: "Post Deleted");
                             });
                           },
                           child: Padding(
@@ -223,10 +223,10 @@ class _PostDetailsState extends State<PostDetails> {
                         isApproved = tempApprove;
                         _isLoading = false;
                       });
-                      BotToast.showText(
-                          text: isApproved
-                              ? "Post Approved"
-                              : "Post Disapproved");
+                    //   BotToast.showText(
+                    //       text: isApproved
+                    //           ? "Post Approved"
+                    //           : "Post Disapproved");
                     });
                   },
                   child: _isLoading

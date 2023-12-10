@@ -1,4 +1,4 @@
-import 'package:bot_toast/bot_toast.dart';
+// import 'package:bot_toast/bot_toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:glassmorphism_ui/glassmorphism_ui.dart';
@@ -356,6 +356,6 @@ class UserResult extends StatelessWidget {
   }
   void deleteUser(String email, String password) async {
     AuthenticationService().deleteUser(email: email, password: password);
-    BotToast.showText(text: 'User Deleted Refresh');
+    // BotToast.showText(text: 'User Deleted Refresh');
   }
 }

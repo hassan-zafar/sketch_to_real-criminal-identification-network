@@ -22,7 +22,7 @@ class DatabaseMethods {
       UserLocalData().setUserModel(userModelString);
     }).catchError(
       (Object obj) {
-        errorToast(message: obj.toString());
+        // errorToast(message: obj.toString());
       },
     );
   }

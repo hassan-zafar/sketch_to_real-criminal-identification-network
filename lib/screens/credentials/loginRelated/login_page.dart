@@ -209,7 +209,7 @@ class _LoginPageState extends State<LoginPage> {
       String? userId = await AuthenticationService()
           .logIn(email: email!, password: password!)
           .onError((error, stackTrace) {
-        errorToast(message: "Please Try again");
+        // errorToast(message: "Please Try again");
         setState(() {
           _isLoading = false;
           _emailController.clear();

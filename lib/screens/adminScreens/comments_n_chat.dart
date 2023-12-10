@@ -1,4 +1,4 @@
-import 'package:bot_toast/bot_toast.dart';
+// import 'package:bot_toast/bot_toast.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -161,7 +161,7 @@ class CommentsNChatState extends State<CommentsNChat> {
       // }
 
     } else {
-      BotToast.showText(text: "Message field shouldn't be left Empty");
+      // BotToast.showText(text: "Message field shouldn't be left Empty");
     }
     _commentNMessagesController.clear();
   }

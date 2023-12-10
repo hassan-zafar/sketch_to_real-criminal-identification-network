@@ -236,7 +236,7 @@ class _SignUpPageState extends State<SignUpPage> {
         setState(() {
           _isLoading = false;
         });
-        errorToast(message: "$error");
+        // errorToast(message: "$error");
         return null;
       });
       setState(() {
@@ -244,7 +244,7 @@ class _SignUpPageState extends State<SignUpPage> {
       });
       Navigator.of(context).pop();
       if (_user != null) {
-        successToast(message: 'Successfully Registered');
+        // successToast(message: 'Successfully Registered');
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: ((context) => HomePage())));
       }

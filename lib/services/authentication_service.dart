@@ -24,7 +24,7 @@ class AuthenticationService {
           .signInWithEmailAndPassword(email: email!, password: password!);
       return result.user!.uid;
     } on FirebaseAuthException catch (e) {
-      errorToast(message: e.message!);
+      // errorToast(message: e.message!);
       return null;
     }
   }
@@ -61,7 +61,7 @@ class AuthenticationService {
       final UserCredential result = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email!, password: password!)
           .catchError((Object obj) {
-        errorToast(message: obj.toString());
+        // errorToast(message: obj.toString());
       });
       final User user = result.user!;
       assert(user != null);
@@ -80,7 +80,7 @@ class AuthenticationService {
       }
       return user;
     } on FirebaseAuthException catch (e) {
-      errorToast(message: e.message!);
+      // errorToast(message: e.message!);
       return null;
     }
   }

@@ -12,7 +12,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 import 'constants.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:bot_toast/bot_toast.dart';
+// import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
@@ -63,8 +63,8 @@ class MyApp extends StatelessWidget {
     }
     return GetMaterialApp(
       title: 'Sketch to Real',
-      builder: BotToastInit(),
-      navigatorObservers: [BotToastNavigatorObserver()],
+      // builder: BotToastInit(),
+      // navigatorObservers: [BotToastNavigatorObserver()],
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
         primaryColor: const Color(0xff96B7BF),
